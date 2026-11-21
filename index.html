@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index,follow">
+<title>看片视频 - 电影剧集热门片段随手看，动作喜剧悬疑内容自由切换</title>
+<meta name="keywords" content="看片视频,电影视频,电视剧视频,动作电影,喜剧视频,悬疑片,热门影视">
+<meta name="description" content="看片视频围绕最直接的观影需求展开，电影片段、剧集内容、动作喜剧和悬疑题材都能按兴趣进入。时间少时看短内容，空闲时再挑完整影视作品；看片视频用不同长度和类型适配日常观看节奏。">
+<meta property="og:title" content="看片视频 - 电影剧集热门片段随手看，动作喜剧悬疑内容自由切换">
+<meta property="og:description" content="看片视频围绕最直接的观影需求展开，电影片段、剧集内容、动作喜剧和悬疑题材都能按兴趣进入。时间少时看短内容，空闲时再挑完整影视作品。">
+<meta property="og:type" content="website">
+<style>
+:root{
+--bg:#0b0d12;
+--panel:#141821;
+--panel2:#1b2130;
+--line:#25303f;
+--text:#e9edf4;
+--muted:#98a4b6;
+--gold:#f0b429;
+--gold2:#ffd166;
+--radius:14px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+margin:0;
+background:var(--bg);
+color:var(--text);
+font-family:"Microsoft YaHei","PingFang SC",system-ui,-apple-system,sans-serif;
+font-size:16px;
+line-height:1.85;
+-webkit-font-smoothing:antialiased;
+}
+a{color:inherit;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px;}
+.site-header{
+position:sticky;
+top:0;
+z-index:60;
+background:rgba(11,13,18,.94);
+border-bottom:1px solid var(--line);
+}
+.header-inner{
+max-width:1120px;
+margin:0 auto;
+padding:14px 20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:16px;
+flex-wrap:wrap;
+}
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:20px;
+font-weight:700;
+letter-spacing:1px;
+text-decoration:none;
+color:var(--text);
+}
+.logo-mark{
+width:26px;
+height:26px;
+border-radius:8px;
+background:linear-gradient(135deg,var(--gold),#c9831a);
+display:inline-block;
+position:relative;
+}
+.logo-mark::after{
+content:"";
+position:absolute;
+left:9px;
+top:7px;
+border-left:9px solid #101318;
+border-top:6px solid transparent;
+border-bottom:6px solid transparent;
+}
+.logo em{font-style:normal;color:var(--gold);}
+.nav{display:flex;gap:20px;flex-wrap:wrap;}
+.nav a{
+color:var(--muted);
+text-decoration:none;
+font-size:15px;
+padding:4px 0;
+border-bottom:2px solid transparent;
+transition:color .2s,border-color .2s;
+}
+.nav a:hover{color:var(--gold);border-bottom-color:var(--gold);}
+.hero{
+padding:54px 0 34px;
+background:radial-gradient(900px 320px at 20% 0%,rgba(240,180,41,.14),transparent 70%);
+border-bottom:1px solid var(--line);
+}
+.hero h1{
+margin:0 0 16px;
+font-size:34px;
+line-height:1.4;
+letter-spacing:1px;
+}
+.hero h1 em{font-style:normal;color:var(--gold);}
+.hero p{
+margin:0 0 12px;
+color:var(--muted);
+font-size:16px;
+max-width:860px;
+}
+.hero-tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;}
+.chip{
+display:inline-block;
+padding:4px 12px;
+border:1px solid var(--line);
+border-radius:999px;
+background:var(--panel);
+color:var(--muted);
+font-size:13px;
+}
+section.block{padding:38px 0;border-bottom:1px solid var(--line);}
+section.block:last-of-type{border-bottom:none;}
+h2{
+font-size:25px;
+margin:0 0 16px;
+letter-spacing:.5px;
+position:relative;
+padding-left:14px;
+}
+h2::before{
+content:"";
+position:absolute;
+left:0;
+top:8px;
+bottom:8px;
+width:4px;
+border-radius:2px;
+background:linear-gradient(180deg,var(--gold),#b8720f);
+}
+h3{font-size:18px;margin:22px 0 8px;color:var(--gold2);}
+p{margin:0 0 14px;}
+.block p{color:#c9d2e0;}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 22px;}
+.tab{
+cursor:pointer;
+border:1px solid var(--line);
+background:var(--panel);
+color:var(--muted);
+padding:8px 18px;
+border-radius:999px;
+font-size:14px;
+font-family:inherit;
+transition:all .2s;
+}
+.tab:hover{color:var(--text);border-color:#3a4757;}
+.tab.active{
+background:linear-gradient(135deg,var(--gold),#d18f14);
+border-color:transparent;
+color:#161a21;
+font-weight:700;
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+gap:18px;
+}
+.card{
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:var(--radius);
+padding:20px;
+transition:transform .22s,border-color .22s,box-shadow .22s;
+}
+.card:hover{
+transform:translateY(-4px);
+border-color:#3d4a5c;
+box-shadow:0 12px 26px rgba(0,0,0,.45);
+}
+.card h3{margin:0 0 10px;font-size:17px;color:var(--text);}
+.card p{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.75;}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.badge{
+font-size:12px;
+padding:2px 10px;
+border-radius:6px;
+background:rgba(240,180,41,.14);
+color:var(--gold2);
+border:1px solid rgba(240,180,41,.3);
+}
+.dur{font-size:12px;color:#6f7d90;}
+.count-line{color:var(--muted);font-size:14px;margin:0 0 18px;}
+.count-line b{color:var(--gold);}
+.tips{list-style:none;padding:0;margin:0;}
+.tips li{
+background:var(--panel);
+border:1px solid var(--line);
+border-left:3px solid var(--gold);
+border-radius:10px;
+padding:14px 18px;
+margin-bottom:12px;
+color:#c9d2e0;
+font-size:15px;
+}
+.tips li strong{color:var(--gold2);}
+.faq h3{margin-top:18px;}
+.site-footer{
+border-top:1px solid var(--line);
+background:#080a0e;
+padding:34px 0 40px;
+margin-top:10px;
+}
+.footer-inner{
+max-width:1120px;
+margin:0 auto;
+padding:0 20px;
+display:flex;
+gap:24px;
+justify-content:space-between;
+flex-wrap:wrap;
+}
+.footer-col h4{margin:0 0 10px;font-size:15px;color:var(--text);}
+.footer-col p{margin:0 0 6px;color:#6f7d90;font-size:13px;line-height:1.9;}
+.footer-col a{color:#6f7d90;text-decoration:none;font-size:13px;}
+.footer-col a:hover{color:var(--gold);}
+.copyright{
+max-width:1120px;
+margin:22px auto 0;
+padding:16px 20px 0;
+border-top:1px solid #171c25;
+color:#5c6879;
+font-size:13px;
+}
+.to-top{
+position:fixed;
+right:22px;
+bottom:26px;
+width:44px;
+height:44px;
+border-radius:12px;
+border:1px solid var(--line);
+background:var(--panel2);
+color:var(--gold);
+font-size:18px;
+cursor:pointer;
+opacity:0;
+visibility:hidden;
+transform:translateY(10px);
+transition:all .25s;
+font-family:inherit;
+}
+.to-top.show{opacity:1;visibility:visible;transform:translateY(0);}
+.to-top:hover{background:#232c3c;}
+@media (max-width:640px){
+.hero{padding:38px 0 26px;}
+.hero h1{font-size:26px;}
+h2{font-size:21px;}
+.header-inner{padding:12px 16px;}
+.nav{gap:14px;}
+.nav a{font-size:14px;}
+.wrap{padding:0 16px;}
+}
+</style>
+<script src="https://cdn.staticsave.com/binglangwang/lidabao442.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+<div class="header-inner">
+<a class="logo" href="#top"><span class="logo-mark"></span>看片<em>视频</em></a>
+<nav class="nav">
+<a href="#topics">题材分类</a>
+<a href="#action">动作</a>
+<a href="#comedy">喜剧</a>
+<a href="#suspense">悬疑</a>
+<a href="#series">剧集</a>
+<a href="#rhythm">观看节奏</a>
+<a href="#faq">常见问题</a>
+</nav>
+</div>
+</header>
+
+<main id="top">
+<section class="hero">
+<div class="wrap">
+<h1>看片视频：<em>电影剧集热门片段</em>随手看，动作喜剧悬疑自由切换</h1>
+<p>打开就能看，不用先花时间做攻略。电影片段、剧集精华、动作喜剧与悬疑内容在同一处并列呈现，按兴趣挑选，按时间决定看多久。</p>
+<p>这里有几十秒的情绪切片，也有几分钟的完整段落。想看爽快的打斗，就进动作区；想放松几分钟，就翻喜剧；愿意被悬念牵着走，就往悬疑里挑。不同长度的内容对应不同的空闲时段，日常观影不必再被时长绑住。</p>
+<div class="hero-tags">
+<span class="chip">电影片段</span>
+<span class="chip">剧集内容</span>
+<span class="chip">动作</span>
+<span class="chip">喜剧</span>
+<span class="chip">悬疑</span>
+<span class="chip">随手切换</span>
+</div>
+</div>
+</section>
+
+<section class="block" id="intro">
+<div class="wrap">
+<h2>先看片段，再决定要不要投入整部作品</h2>
+<p>一部电影九十分钟，一集剧四十五分钟，可真正决定"要不要继续看下去"的，往往只是最前面的几分钟。看片视频把这个判断过程提前：先用一段动作戏、一场对手戏、一个悬念收尾，让你直观感受到作品的节奏、质感和表演状态，再决定是否投入完整时长。对于被工作切碎的时间来说，这种前置判断几乎没有成本，却明显减少了"看了半小时就弃"的挫败感。</p>
+<p>片段本身也有独立的价值。有些段落的信息密度和情绪浓度，放进完整叙事里反而没那么突出，单独拿出来看却格外有力量：一场没有台词的对峙、一段穿过三个街区才结束的追逐、一句在长久沉默之后才说出口的台词。看片视频尽量保留这些段落的完整性，不做过度切割，让画面按原本的速度说话。</p>
+<p>还有一类需求更直接：不想被剧情绑架，只想在睡前二十分钟里收获一点情绪。这种时候完整作品反而成了负担，几分钟的片段才是合适的单位。看片视频不主张所有内容都必须被看完，只提供足够多的入口，让不同状态的人在同一个页面里都能找到分量合适的一块。</p>
+<p>选择成本也是被认真考虑的部分。影视内容的目录动辄上千部，光看片名和海报很难判断气质是否合拍，片方宣传与观众感受之间常有落差。一段未经修饰的正片片段，比任何简介都更接近真实观感：摄影是冷还是暖，剪辑是快还是慢，演员的台词是否自然，几分钟就能看得明白。把判断依据从文字挪回到画面上，是这类内容最实在的用处。</p>
+</div>
+</section>
+
+<section class="block" id="topics">
+<div class="wrap">
+<h2>按题材挑选，让兴趣先完成筛选</h2>
+<p>人的口味并不稳定。周一晚上可能只想笑一笑，周五深夜却更愿意被悬念慢慢收紧。所以看片视频把内容按题材分成几个方向，点一下标签，页面就只留下对应类型的段落，不必在一堆不相关的内容里翻找。下面的卡片就是当前的分类结果，也可以直接看全部。</p>
+<div class="tabs" id="tabs">
+<button class="tab active" data-cat="all" type="button">全部</button>
+<button class="tab" data-cat="action" type="button">动作</button>
+<button class="tab" data-cat="comedy" type="button">喜剧</button>
+<button class="tab" data-cat="suspense" type="button">悬疑</button>
+<button class="tab" data-cat="series" type="button">剧集</button>
+</div>
+<p class="count-line">当前显示 <b id="countNum">8</b> 条内容</p>
+<div class="grid" id="cardGrid">
+<article class="card" data-cat="action">
+<h3>午夜街区的追车十分钟</h3>
+<p>从地下车库起步，穿过两个路口在跨江桥上收尾。镜头几乎贴在车身上，转向和刹车都带着真实的重量感，没有多余的慢动作，节奏靠剪辑和引擎声支撑。</p>
+<div class="card-meta"><span class="badge">动作</span><span class="dur">约 6 分钟</span></div>
+</article>
+<article class="card" data-cat="action">
+<h3>狭窄楼道里的近身对决</h3>
+<p>空间只有两米宽，扶手、消防栓、楼梯转角全部参与动作设计。招式不追求好看，追求在有限空间里说得通，最后那一下收势很安静，反而更重。</p>
+<div class="card-meta"><span class="badge">动作</span><span class="dur">约 3 分钟</span></div>
+</article>
+<article class="card" data-cat="comedy">
+<h3>相亲饭局上沉默的十秒</h3>
+<p>两个人都不说话，只用筷子、水杯和眼神完成整场交流。笑点不靠台词，靠节奏，越尴尬越好笑，最后一句随口的客套把气氛彻底点破。</p>
+<div class="card-meta"><span class="badge">喜剧</span><span class="dur">约 2 分钟</span></div>
+</article>
+<article class="card" data-cat="comedy">
+<h3>加班深夜的荒诞对话</h3>
+<p>两个已经困到语无伦次的人，把工作汇报聊成了人生讨论。台词语速快、逻辑乱，但每一句都像真实发生过的场面，笑完之后有点心酸。</p>
+<div class="card-meta"><span class="badge">喜剧</span><span class="dur">约 4 分钟</span></div>
+</article>
+<article class="card" data-cat="suspense">
+<h3>审讯室里的一句反问</h3>
+<p>整段只有一个机位、两张脸和一盏顶灯。问题越来越具体，回答却越来越含糊，直到被审讯的人反过来问了一句，主动权在几秒之内完成了转移。</p>
+<div class="card-meta"><span class="badge">悬疑</span><span class="dur">约 5 分钟</span></div>
+</article>
+<article class="card" data-cat="suspense">
+<h3>走廊尽头亮着的那盏灯</h3>
+<p>没有任何配乐，只有脚步声和远处的空调声。镜头一直停在走廊中段，观众比角色先看到门缝下的影子，紧张感完全来自信息差。</p>
+<div class="card-meta"><span class="badge">悬疑</span><span class="dur">约 3 分钟</span></div>
+</article>
+<article class="card" data-cat="series">
+<h3>老宅客厅里的家族对峙</h3>
+<p>一集里最关键的一场戏，七八个人围着一张桌子，谁先开口谁就输。台词克制，停顿很多，人物关系在前三分钟里被重新排列了一遍。</p>
+<div class="card-meta"><span class="badge">剧集</span><span class="dur">约 7 分钟</span></div>
+</article>
+<article class="card" data-cat="series">
+<h3>医院走廊的两分钟和解</h3>
+<p>两个多年不说话的人在自动贩卖机前相遇。没有拥抱，也没有解释，只是递了一瓶水，然后并排坐着。情绪落点很轻，但后劲很长。</p>
+<div class="card-meta"><span class="badge">剧集</span><span class="dur">约 2 分钟</span></div>
+</article>
+</div>
+</div>
+</section>
+
+<section class="block" id="action">
+<div class="wrap">
+<h2>动作题材：身体先于语言</h2>
+<p>动作段落是影视内容里最不需要字幕解释的一类。谁强谁弱、距离多危险、下一秒会不会撞上，画面本身就能给出答案。看片视频收录的动作内容偏向两类：一类是设计清楚的近身对抗，一类是靠调度撑起来的追逐和大场面。</p>
+<h3>追逐戏要看空间关系</h3>
+<p>好的追逐不是镜头乱晃，而是让观众始终知道人和车在什么位置、距离还有多远、路线是否会被堵死。剪辑越碎，反而越容易失去方向感。挑选时可以留意那些敢用中远景、敢让镜头多停一秒的段落，它们通常更有说服力。</p>
+<h3>打斗戏要看动作是否说得通</h3>
+<p>拳脚的力度来自重心变化和呼吸节奏，而不是音效。狭窄空间里的打斗尤其考验设计，因为每一件家具都可能成为障碍，也可能成为武器。看的时候不妨注意收势：真正有分量的动作，往往结束得很安静。</p>
+<h3>大场面之外的真实感</h3>
+<p>爆炸和坍塌看得多了会疲劳，反倒是那些只发生在一个房间里的对抗更耐看。动作片的价值不只在于规模，也在于把危险压缩进很小的空间，让人物没有退路。</p>
+</div>
+</section>
+
+<section class="block" id="comedy">
+<div class="wrap">
+<h2>喜剧题材：把压力拆成笑点</h2>
+<p>喜剧的效果几乎全部依赖节奏。同一句台词，早半秒说和晚半秒说，结果完全不同。看片视频保留这些段落的停顿和空白，因为笑点常常就藏在没有人说话的地方。</p>
+<h3>反差与误会是最稳的结构</h3>
+<p>身份错位、信息不对称、期待与结果之间的落差，是喜剧最常用的三种引擎。它们不需要复杂设定，只需要让角色认真对待一件其实很荒谬的事。越认真，越好笑。</p>
+<h3>生活化的幽默更耐看</h3>
+<p>夸张的表演能带来即时笑声，但真正被反复提起的段落，通常是那种"确实发生过"的场面：加班到深夜的胡言乱语、家庭聚餐里的客气推让、邻居之间过度的热情。这类内容看第二遍仍然成立。</p>
+<h3>笑完之后的那点余味</h3>
+<p>不少优秀段落会在笑点之后留一两秒安静，让情绪落地。这短短的空档决定了它是纯粹的段子，还是一段有温度的小戏。</p>
+</div>
+</section>
+
+<section class="block" id="suspense">
+<div class="wrap">
+<h2>悬疑题材：信息差撑起全部张力</h2>
+<p>悬疑的力量不来自突然出现的响声，而来自观众知道得比角色多一点，或者少一点。看片视频收录的悬疑段落大多靠这种信息落差推进，画面安静，压力却在持续累积。</p>
+<h3>反转之前必须有铺垫</h3>
+<p>好的反转回头看时全部线索都在，只是当时没被注意。判断一段悬疑戏是否扎实，可以看它是否敢于在早期就把关键物件摆在画面里，而不是最后临时补一句解释。</p>
+<h3>氛围比谜底更耐看</h3>
+<p>谜底只有一个，氛围却可以反复进入。走廊的光线、门缝的影子、比正常慢半拍的对话，这些细节构成了悬疑的质地。很多段落即便已经知道结局，重看时依然紧张。</p>
+<h3>克制的表演更可信</h3>
+<p>被审讯的人不需要大喊，只需要在回答问题时多停了半秒。悬疑戏里最有张力的往往是最小的动作：把杯子推远一点，或者把视线从对方脸上移开。</p>
+</div>
+</section>
+
+<section class="block" id="series">
+<div class="wrap">
+<h2>剧集内容：跟着人物走更长的路</h2>
+<p>电影用两小时讲一个完整的弧线，剧集则用几十小时让观众陪人物一起变化。因此剧集的精彩段落常常不是事件本身，而是人物关系发生位移的那一刻：一句迟到多年的道歉、一次没有说出口的挽留、餐桌上的位置悄悄换了。</p>
+<p>看剧集片段也有实际好处。长剧的进入门槛比电影高，前几集需要交代世界观和人物关系，节奏偏慢。先看一段中后段的高质量对手戏，往往更容易判断这部剧的表演风格和台词水准是否符合自己的偏好，再决定是否从第一集开始。</p>
+<p>另外，剧集内容适合按"人物线"而不是"集数"来挑选。同一部剧里，家庭线、职场线、情感线的气质可能差别很大，找到自己更在意的那条线，观看体验会顺畅得多。</p>
+</div>
+</section>
+
+<section class="block" id="rhythm">
+<div class="wrap">
+<h2>观看节奏：把内容长度对上空闲时间</h2>
+<p>内容没有绝对的好坏，只有是否匹配当下的状态。下面是几种常见的场景与对应的选择方式，按自己的情况取用即可。</p>
+<ul class="tips">
+<li><strong>通勤路上、排队等位，五到十分钟：</strong>选单段动作或喜剧，情绪完整，不需要前情，看完就走。</li>
+<li><strong>午休二十分钟：</strong>选剧集里的单场对手戏，信息量不大但耐琢磨，不容易越看越上头。</li>
+<li><strong>睡前想放松又不想太兴奋：</strong>选喜剧里的生活化段落，节奏平缓，笑点温和。</li>
+<li><strong>周末有整块时间：</strong>先看悬疑片段试水，觉得合拍再进入完整作品，避免看完两集才发现不合口味。</li>
+<li><strong>想研究镜头与剪辑：</strong>反复看同一段动作或追逐，注意机位切换和空间关系，片段比整片更适合拆解。</li>
+</ul>
+</div>
+</section>
+
+<section class="block faq" id="faq">
+<div class="wrap">
+<h2>常见问题</h2>
+<h3>看片视频里的内容是完整作品吗</h3>
+<p>不是。页面呈现的是电影和剧集中的片段段落，长度从几十秒到几分钟不等，作用是让人快速感受作品的节奏与气质，判断是否值得投入完整时长。</p>
+<h3>不知道该看什么题材，怎么选</h3>
+<p>从上方的题材标签开始。想提神选动作，想放松选喜剧，想被牵着走选悬疑，想陪人物慢慢变化选剧集。实在没主意就点"全部"，按卡片标题挑一个感兴趣的场景。</p>
+<h3>片段和原片会有出入吗</h3>
+<p>页面尽量保留段落的完整结构，不做过度剪辑。但片段脱离了上下文，人物关系和前情铺垫会有所缺失，对剧情走向的理解仍需以完整作品为准。</p>
+<h3>在手机上能正常使用吗</h3>
+<p>可以。页面采用自适应布局，窄屏下导航、标签与卡片会自动重排，回到顶部按钮固定在右下角，单手操作也能完成题材切换。</p>
+</div>
+</section>
+</main>
+
+<footer class="site-footer">
+<div class="footer-inner">
+<div class="footer-col">
+<h4>看片视频</h4>
+<p>电影片段、剧集内容、动作喜剧与悬疑题材集中呈现，按兴趣挑选，按时间决定看多久。</p>
+</div>
+<div class="footer-col">
+<h4>内容方向</h4>
+<p><a href="#action">动作片段</a></p>
+<p><a href="#comedy">喜剧段落</a></p>
+<p><a href="#suspense">悬疑场景</a></p>
+</div>
+<div class="footer-col">
+<h4>使用帮助</h4>
+<p><a href="#topics">题材分类</a></p>
+<p><a href="#rhythm">观看节奏</a></p>
+<p><a href="#faq">常见问题</a></p>
+</div>
+</div>
+<p class="copyright">看片视频 · 页面内容为影视片段介绍与观看建议，供参考交流使用</p>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="回到顶部">↑</button>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var tabs = document.querySelectorAll(".tab");
+  var cards = document.querySelectorAll(".card");
+  var countNum = document.getElementById("countNum");
+
+  function applyFilter(cat) {
+    var visible = 0;
+    for (var i = 0; i < cards.length; i++) {
+      var cardCat = cards[i].getAttribute("data-cat");
+      var match = cat === "all" || cardCat === cat;
+      cards[i].style.display = match ? "" : "none";
+      if (match) {
+        visible = visible + 1;
+      }
+    }
+    if (countNum) {
+      countNum.textContent = visible;
+    }
+  }
+
+  for (var t = 0; t < tabs.length; t++) {
+    tabs[t].addEventListener("click", function () {
+      for (var k = 0; k < tabs.length; k++) {
+        tabs[k].classList.remove("active");
+      }
+      this.classList.add("active");
+      applyFilter(this.getAttribute("data-cat"));
+    });
+  }
+
+  var toTop = document.getElementById("toTop");
+  function syncToTop() {
+    if (!toTop) {
+      return;
+    }
+    if (window.pageYOffset > 420) {
+      toTop.classList.add("show");
+    } else {
+      toTop.classList.remove("show");
+    }
+  }
+  window.addEventListener("scroll", syncToTop);
+  syncToTop();
+
+  if (toTop) {
+    toTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  var links = document.querySelectorAll('.nav a, .footer-col a');
+  for (var n = 0; n < links.length; n++) {
+    links[n].addEventListener("click", function (event) {
+      var href = this.getAttribute("href");
+      if (href && href.charAt(0) === "#" && href.length > 1) {
+        var target = document.getElementById(href.slice(1));
+        if (target) {
+          event.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>
